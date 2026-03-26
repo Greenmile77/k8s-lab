@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fresh-loader
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: loader
+        image: portfolio-loader:latest
+        imagePullPolicy: Never
+        env:
+        - name: POSTGRES_HOST
+          value: "postgres-service"
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_USER
+          value: "portfolio_user"
+        - name: POSTGRES_PASSWORD
+          value: "secure_password_123"
+        - name: POSTGRES_DB
+          value: "portfolio_db"
